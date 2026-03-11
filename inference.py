@@ -56,7 +56,7 @@ def discover_model_path() -> str:
 
 def _load_model(model_path: Path, device: torch.device) -> nn.Module:
     model = models.resnet18(num_classes=10).to(device)
-    ckpt = torch.load(model_path, map_location=device)
+    ckpt = torch.load(model_path, map_location=device, weights_only=False)
     model.load_state_dict(ckpt["state_dict"])
     model.eval()
     return model
